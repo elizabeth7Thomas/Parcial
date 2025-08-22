@@ -183,9 +183,26 @@ empleadoSchema.virtual('tiempoEmpresa').get(function() {
 
 
 empleadoSchema.pre('save', async function(next) {
-  if (!this.codigoEmpleado) {
-    const count = await this.constructor.countDocuments();
-    this.codigoEmpleado = `EMP${String(count + 1).padStart(4, '0')}`;
+  if (this.isNew && !this.codigoEmpleado) {
+    try {
+      
+      const Counter = mongoose.model('Counter') || mongoose.model('Counter', new mongoose.Schema({
+        _id: { type: String, required: true },
+        seq: { type: Number, default: 0 }
+      }));
+      
+      const counter = await Counter.findByIdAndUpdate(
+        'empleadoId',
+        { $inc: { seq: 1 } },
+        { new: true, upsert: true }
+      );
+      
+      this.codigoEmpleado = `EMP${String(counter.seq).padStart(4, '0')}`;
+    } catch (error) {
+      // Fallback: usar timestamp
+      this.codigoEmpleado = `EMP${Date.now().toString().slice(-4)}`;
+      console.error('Error generando código de empleado:', error);
+    }
   }
   next();
 });

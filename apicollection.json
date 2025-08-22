@@ -1,0 +1,465 @@
+{
+  "info": {
+    "name": "Sistema de Gestión de Empleados y Proyectos",
+    "description": "API Collection para probar el sistema de gestión de empleados y proyectos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "empleadoId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "proyectoId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "codigoEmpleado",
+      "value": "EMP0001",
+      "type": "string"
+    },
+    {
+      "key": "codigoProyecto",
+      "value": "PROJ0001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Empleados",
+      "item": [
+        {
+          "name": "Obtener todos los empleados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados"]
+            }
+          }
+        },
+        {
+          "name": "Obtener empleados disponibles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/disponibles",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", "disponibles"]
+            }
+          }
+        },
+        {
+          "name": "Obtener estadísticas de empleados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/estadisticas",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", "estadisticas"]
+            }
+          }
+        },
+        {
+          "name": "Obtener empleado por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Obtener empleado por código",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/codigo/{{codigoEmpleado}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", "codigo", "{{codigoEmpleado}}"]
+            }
+          }
+        },
+        {
+          "name": "Crear nuevo empleado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombres\": \"Juan Carlos\",\n  \"apellidos\": \"Pérez López\",\n  \"email\": \"juan.perez@empresa.com\",\n  \"telefono\": \"+502 1234-5678\",\n  \"fechaNacimiento\": \"1990-05-15\",\n  \"tipoDocumento\": \"DPI\",\n  \"numeroDocumento\": \"1234567890101\",\n  \"codigoEmpleado\": \"{{codigoEmpleado}}\",\n  \"direccion\": {\n    \"calle\": \"5ta avenida 12-34\",\n    \"ciudad\": \"Ciudad de Guatemala\",\n    \"departamento\": \"Guatemala\",\n    \"codigoPostal\": \"01001\",\n    \"pais\": \"Guatemala\"\n  },\n  \"puesto\": \"Desarrollador Senior\",\n  \"departamento\": \"Desarrollo\",\n  \"fechaIngreso\": \"2023-01-15\",\n  \"salario\": 15000,\n  \"tipoContrato\": \"Indefinido\",\n  \"estado\": \"Activo\",\n  \"nivelEducacion\": \"Universidad\",\n  \"habilidades\": [\"JavaScript\", \"Node.js\", \"MongoDB\"],\n  \"experienciaAnios\": 5,\n  \"contactoEmergencia\": {\n    \"nombre\": \"María Pérez\",\n    \"telefono\": \"+502 8765-4321\",\n    \"relacion\": \"Esposa\"\n  },\n  \"tipoSangre\": \"O+\",\n  \"alergias\": [\"Penicilina\"],\n  \"notas\": \"Empleado ejemplar\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/empleados",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar empleado",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"salario\": 16000,\n  \"puesto\": \"Desarrollador Líder\",\n  \"codigoEmpleado\": \"{{codigoEmpleado}}\",\n  \"habilidades\": [\"JavaScript\", \"Node.js\", \"MongoDB\", \"React\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/empleados/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar empleado",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar empleado por código",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/codigo/{{codigoEmpleado}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", "codigo", "{{codigoEmpleado}}"]
+            }
+          }
+        },
+        {
+          "name": "Asignar empleado a proyecto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"proyectoId\": \"{{proyectoId}}\",\n  \"codigoProyecto\": \"{{codigoProyecto}}\",\n  \"fechaAsignacion\": \"2024-01-15\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/empleados/:id/asignar-proyecto",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", ":id", "asignar-proyecto"]
+            }
+          }
+        },
+        {
+          "name": "Asignar empleado a proyecto por código",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"proyectoId\": \"{{proyectoId}}\",\n  \"codigoProyecto\": \"{{codigoProyecto}}\",\n  \"fechaAsignacion\": \"2024-01-15\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/empleados/codigo/{{codigoEmpleado}}/asignar-proyecto",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", "codigo", "{{codigoEmpleado}}", "asignar-proyecto"]
+            }
+          }
+        },
+        {
+          "name": "Liberar empleado de proyecto",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/:id/liberar-proyecto",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", ":id", "liberar-proyecto"]
+            }
+          }
+        },
+        {
+          "name": "Liberar empleado de proyecto por código",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empleados/codigo/{{codigoEmpleado}}/liberar-proyecto",
+              "host": ["{{baseUrl}}"],
+              "path": ["empleados", "codigo", "{{codigoEmpleado}}", "liberar-proyecto"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Proyectos",
+      "item": [
+        {
+          "name": "Obtener todos los proyectos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos"]
+            }
+          }
+        },
+        {
+          "name": "Obtener proyectos activos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/activos",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "activos"]
+            }
+          }
+        },
+        {
+          "name": "Obtener proyecto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Obtener proyecto por código",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/codigo/{{codigoProyecto}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "codigo", "{{codigoProyecto}}"]
+            }
+          }
+        },
+        {
+          "name": "Obtener empleados del proyecto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/:id/empleados",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", ":id", "empleados"]
+            }
+          }
+        },
+        {
+          "name": "Obtener empleados del proyecto por código",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/codigo/{{codigoProyecto}}/empleados",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "codigo", "{{codigoProyecto}}", "empleados"]
+            }
+          }
+        },
+        {
+          "name": "Crear nuevo proyecto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Sistema de Gestión de Recursos\",\n  \"descripcion\": \"Desarrollo de un sistema completo para gestión de recursos humanos\",\n  \"codigoProyecto\": \"{{codigoProyecto}}\",\n  \"fechaInicio\": \"2024-01-01\",\n  \"fechaFinalizacion\": \"2024-06-30\",\n  \"presupuesto\": 500000,\n  \"moneda\": \"GTQ\",\n  \"prioridad\": \"Alta\",\n  \"categoria\": \"Desarrollo Web\",\n  \"cliente\": {\n    \"nombre\": \"Empresa XYZ\",\n    \"email\": \"contacto@xyz.com\",\n    \"telefono\": \"+502 5555-5555\",\n    \"empresa\": \"XYZ Corp\"\n  },\n  \"tecnologias\": [\"Node.js\", \"React\", \"MongoDB\"],\n  \"repositorio\": \"https://github.com/empresa/sistema-gestion\",\n  \"notas\": \"Proyecto estratégico para la empresa\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proyectos",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar proyecto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"porcentajeCompletado\": 25,\n  \"codigoProyecto\": \"{{codigoProyecto}}\",\n  \"estado\": \"En Progreso\",\n  \"notas\": \"Proyecto avanzando según lo planeado\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar proyecto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", ":id"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar proyecto por código",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/codigo/{{codigoProyecto}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "codigo", "{{codigoProyecto}}"]
+            }
+          }
+        },
+        {
+          "name": "Agregar empleado a proyecto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empleadoId\": \"{{empleadoId}}\",\n  \"codigoEmpleado\": \"{{codigoEmpleado}}\",\n  \"rol\": \"Desarrollador Senior\",\n  \"horasAsignadas\": 40\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/:id/agregar-empleado",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", ":id", "agregar-empleado"]
+            }
+          }
+        },
+        {
+          "name": "Agregar empleado a proyecto por código",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empleadoId\": \"{{empleadoId}}\",\n  \"codigoEmpleado\": \"{{codigoEmpleado}}\",\n  \"rol\": \"Desarrollador Senior\",\n  \"horasAsignadas\": 40\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/codigo/{{codigoProyecto}}/agregar-empleado",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "codigo", "{{codigoProyecto}}", "agregar-empleado"]
+            }
+          }
+        },
+        {
+          "name": "Remover empleado de proyecto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empleadoId\": \"{{empleadoId}}\",\n  \"codigoEmpleado\": \"{{codigoEmpleado}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/:id/remover-empleado",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", ":id", "remover-empleado"]
+            }
+          }
+        },
+        {
+          "name": "Remover empleado de proyecto por código",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empleadoId\": \"{{empleadoId}}\",\n  \"codigoEmpleado\": \"{{codigoEmpleado}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/proyectos/codigo/{{codigoProyecto}}/remover-empleado",
+              "host": ["{{baseUrl}}"],
+              "path": ["proyectos", "codigo", "{{codigoProyecto}}", "remover-empleado"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
