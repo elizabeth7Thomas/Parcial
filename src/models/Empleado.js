@@ -199,7 +199,7 @@ empleadoSchema.pre('save', async function(next) {
       
       this.codigoEmpleado = `EMP${String(counter.seq).padStart(4, '0')}`;
     } catch (error) {
-      // Fallback: usar timestamp
+      
       this.codigoEmpleado = `EMP${Date.now().toString().slice(-4)}`;
       console.error('Error generando código de empleado:', error);
     }
