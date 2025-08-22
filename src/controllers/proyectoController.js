@@ -114,7 +114,7 @@ exports.agregarEmpleadoAProyecto = async (req, res) => {
       await proyecto.save();
     }
 
-    // Actualizar estado del empleado
+    
     empleado.proyectoActual = proyecto._id;
     empleado.fechaAsignacionProyecto = new Date();
     await empleado.save();
@@ -159,3 +159,4 @@ exports.obtenerProyectosActivos = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al obtener proyectos activos', error: error.message });
   }
 };
+
